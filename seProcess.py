@@ -5,19 +5,10 @@
 """
 
 
-from dataStruct import AppPolicyInfo
 import json
 import re
 
 type_default_path = r"save_default"
-def simpleGenerateSecurityLabel(appPolicyInfo: AppPolicyInfo):
-    appPolicyInfo.security_label = appPolicyInfo.name + "_t"
-
-def SimpleGenerateExecSecurityLabel(appPolicyInfo: AppPolicyInfo):
-    appPolicyInfo.security_exec_label = appPolicyInfo.name + "_exe_t"
-
-def simpleGenerateDataSecurityLabel(appPolicyInfo: AppPolicyInfo):
-    appPolicyInfo.security_data_label = appPolicyInfo.name + "_data_t"
 
 """寻找默认type也可以判断是否为公有还是私有，待完善"""
 def findInDefault(fileName : str):
@@ -26,7 +17,10 @@ def findInDefault(fileName : str):
         file_data = json.load(f)
     # 分割，寻找默认簇
     file_name_split = fileName.split('/')
-    file_class = file_name_split[1]
+    if len(file_name_split) > 1:
+        file_class = file_name_split[1]
+    else:
+        file_class = file_name_split[0]
     # 判断是否为默认type
     if file_class not in file_data:
         return None, False

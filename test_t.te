@@ -1,0 +1,12 @@
+type test_t
+type test_exe_t
+
+gen_require(`class file { execute read open write };')
+
+gen_require(`type var_t;')
+
+allow test_t var_t:file { execute read open write };
+
+gen_require(`type etc_t;')
+
+allow test_t etc_t:file { read write };
