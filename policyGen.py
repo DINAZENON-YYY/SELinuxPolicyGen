@@ -23,10 +23,10 @@ def DoAppPolicyGenerate(appname: str, appInfo: dict):
     # InitAppTypeDefine()
 
     """普通文件allow语句转换"""
-    InitAppFilePolicy()
+    InitAppFilePolicy(app_policy_info)
 
     """可执行文件allow语句转换"""
-    InitAppExcFilePolicy()
+    InitAppExcFilePolicy(app_policy_info)
 
     """合并allow语句"""
-    MergePolicy()
+    MergePolicy(app_policy_info)
