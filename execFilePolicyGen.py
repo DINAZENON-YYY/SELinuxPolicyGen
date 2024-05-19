@@ -16,11 +16,16 @@ def InitAppExcFilePolicy(app_policy_info : AppPolicyInfo):
     # 判断是否为可执行文件
     if os.access(absolute_path, os.X_OK):
         type_default, ok = findInDefault(app_policy_info.path)
+        str_param = " "
+        if os.path.isdir(absolute_path):
+            str_param = " -d "
+        else:
+            str_param = " -- "
         # 判断是否有默认type
         if ok:
-            app_policy_info.policy_exec_file += f"gen_context(system_u: object_r: {type_default}, s0)\n"
+            app_policy_info.policy_exec_file += absolute_path + str_param + f"gen_context(system_u: object_r: {type_default}, s0)\n"
         else:
-            app_policy_info.policy_exec_file += f"gen_context(system_u: object_r: {app_policy_info.security_exec_label}, s0)\n"
+            app_policy_info.policy_exec_file += absolute_path + str_param + f"gen_context(system_u: object_r: {app_policy_info.security_exec_label}, s0)\n"
     return  True
 
 """
