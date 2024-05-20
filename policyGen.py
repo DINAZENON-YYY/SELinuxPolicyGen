@@ -11,13 +11,17 @@ def InitAppTypeDefine():
 def MergePolicy(app_policy_info : AppPolicyInfo):
     policy_type_file = [app_policy_info.security_label, app_policy_info.security_exec_label, app_policy_info.security_data_label]
 
-    policy_type = "type " + app_policy_info.security_label + '\n'
+    policy_type = "type " + app_policy_info.security_label[0] + ";\n"
     policy_public = ""
     policy_private = ""
     policy_exec = ""
 
-    if app_policy_info.policy_exec_file:
-        policy_type += "type " + app_policy_info.security_exec_label + '\n'
+    #for type in app_policy_info.security_label:
+        #policy_type += "type " + type + '\n'
+
+    #if app_policy_info.policy_exec_file:
+        #for i in range(1,len(app_policy_info.security_exec_label)):
+            #policy_type += "type " + app_policy_info.security_exec_label[i] + '\n'
 
     for public_file in app_policy_info.policy_public_file:
         policy_public += "\n" + public_file + "\n"

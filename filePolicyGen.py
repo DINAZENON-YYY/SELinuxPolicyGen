@@ -15,7 +15,7 @@ seProcess.findInDefault有两个返回值：type 和 ok。
 def InitAppFilePolicy(app_policy_info : AppPolicyInfo):
     public_file=app_policy_info.public_file
     private_file=app_policy_info.private_file
-    label=app_policy_info.security_label
+    label=app_policy_info.security_label[0]
     label_perms={}
     file_perms={}
     for file , perms in public_file.items():
@@ -24,6 +24,7 @@ def InitAppFilePolicy(app_policy_info : AppPolicyInfo):
             for se_perm in perms :
                 if type not in label_perms:
                     label_perms[type]={}
+                    app_policy_info.security_label.append(type)
                 label_perms[type][se_perm]=True
                 file_perms[se_perm]=True
         else:
@@ -60,7 +61,7 @@ def InitAppFilePolicy(app_policy_info : AppPolicyInfo):
         tmp=[]
         tmp.append(file)
         tmp.append(se_file_type_flag)
-        tmp.append(f"gen_context(system_u:object_r:{app_policy_info.security_data_label},s0)")
+        tmp.append(f"gen_context(system_u:object_r:{app_policy_info.security_data_label[0]},s0)")
         private_file_result.append(tmp)
         app_policy_info.policy_public_file = public_file_result
         app_policy_info.policy_private_file = private_file_result

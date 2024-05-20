@@ -8,9 +8,9 @@ from seProcess import findInDefault
 class AppPolicyInfo:
     def __init__(self, name, path ,dic={}):  #dic为程序分析工具的输出
         self.name = name  # 包名
-        self.security_label = ""  # 主体标签
-        self.security_exec_label = ""  # 可执行文件标签
-        self.security_data_label = ""  # 数据标签
+        self.security_label = []  # 主体标签
+        self.security_exec_label = []  # 可执行文件标签
+        self.security_data_label = []  # 数据标签
         self.path = path  # app路径
 
         # 暂定可能需要，先不用实现

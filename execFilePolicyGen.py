@@ -30,6 +30,7 @@ def InitAppExcFilePolicy(app_policy_info : AppPolicyInfo):
                 str_param = " -- "
             # 判断是否有默认type
             if ok:
+                app_policy_info.security_exec_label.append(type_default)
                 app_policy_info.policy_exec_file.append(file_name + str_param + f"gen_context(system_u: object_r: {type_default}, s0)\n")
             else:
                 app_policy_info.policy_exec_file.append(file_name + str_param + f"gen_context(system_u: object_r: {app_policy_info.security_exec_label}, s0)\n")
