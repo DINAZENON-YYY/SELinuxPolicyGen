@@ -1,14 +1,14 @@
 type test_t;
 
-gen_require(`class file { read write open execute };')
+gen_require(`class file { open write read execute };')
 
-gen_require(`type var_t;')
+gen_require(`type var_log_t;')
 
-allow test_t var_t:file { read write open };
+allow test_t var_log_t:file { open write read };
 
 gen_require(`type etc_t;')
 
-allow test_t etc_t:file { read write };
+allow test_t etc_t:file { write read };
 
 gen_require(`type portage_exec_t;')
 

@@ -65,7 +65,7 @@ def DoAppPolicyGenerate(appname: str, apppath : str, appInfo: dict):
     print("file Complete")
     """可执行文件allow语句转换"""
     InitAppExcFilePolicy(app_policy_info)
-    print(app_policy_info.policy_exec_file)
+    # print(app_policy_info.policy_exec_file)
     print("exec Complete")
     """合并allow语句"""
     MergePolicy(app_policy_info)

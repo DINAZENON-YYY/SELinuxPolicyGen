@@ -17,7 +17,7 @@ def InitAppExcFilePolicy(app_policy_info : AppPolicyInfo):
                 break
         if flag is False:
             continue
-        print(file_name)
+        # print(file_name)
         # 转换为绝对路径
         absolute_path = os.path.abspath(file_name)
         # 判断是否为可执行文件

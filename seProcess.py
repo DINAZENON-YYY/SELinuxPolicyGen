@@ -8,7 +8,7 @@
 import json
 import re
 
-type_default_path = r"save_default"
+type_default_path = r"save_default_test"
 
 """寻找默认type也可以判断是否为公有还是私有，待完善"""
 def findInDefault(fileName : str):
@@ -28,17 +28,22 @@ def findInDefault(fileName : str):
     res_type = None
     res_ok = False
     # 通过正则表达式匹配默认type
+    length = 0
     for k,v in file_type_set.items():
         pattern = k
+        #if re.match(pattern, fileName) and re.match(pattern, fileName).group() == fileName:
+        #    return v, True
         match = re.search(pattern, fileName)
         if match:
-            res_type = v
-            res_ok = True
-            break
+            non_regex_pattern = re.sub(r'\(.*\)', '', pattern)
+            # print(non_regex_pattern, v)
+            if len(non_regex_pattern) > length:
+                length = len(non_regex_pattern)
+                res_type = v
+                res_ok = True
     return res_type, res_ok
 
-"""
-测试
-type, ok = findInDefault("/var/log/messsages")
-print(type)
-"""
+
+
+# type, ok = findInDefault("/var/log/message")
+# print(type)
